@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#remember to create the dogshit /mnt/lfs mierda
+#remember to create the /mnt/lfs directory
 
 export LFS=/mnt/lfs #variable delcared
 export LFS_TGT=x86_64-lfs-linux-gnu #triple for 64 bit, on linux, from gnu license
 export LFS_DISK=/dev/sdb #find device name with sudo dmesg
 
 #avoid formatting disk several times and avoid downloaing
-#everything again well check this shi mount
+#everything again well check this mount
 
 if ! grep -q "$LFS" /proc/mounts; then  #what systems are mounterd
   source setupdisk.sh "$LFS_DISK"
@@ -34,7 +34,9 @@ mkdir -pv $LFS/var
 #cross tool check that still runs on a
 
 case $(uname -m) in
+
    x86_64) mkdir -pv $LFS/lib64;;
+
 esac
 
 #do we really want to work in the sd? no but it is what it is
