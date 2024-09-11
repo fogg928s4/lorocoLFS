@@ -27,14 +27,19 @@ do
     echo "Downloading $NAME from $URL"
     #download
     wget "$URL"
-    printf "$MD5SUM $CACHEFILE"
     
     #checks if the md5 is right cus u know man in the middle
     #if md5 wrong ehhh remove the file
-    if ! printf "$MD5SUM $CACHEFILE" | md5sum -c >/dev/null; then
+    #md5 does not like me apparently
+    echo "IM LOSING IT"
+    md5sum "$CACHEFILE" | cut -d ' ' -f1
+    echo "$MD5SUM"
+    if [[ $(md5sum "$CACHEFILE" | cut -d ' ' -f1) != "$MD5SUM" ]]; then
       rm -f "$CACHEFILE"
       echo "Verification of $CACHEFILE failed! MD5 mismatch!"
       exit 1
+    else
+      echo "Download succesful of $CACHEFILE"
     fi
   fi
   
