@@ -2,7 +2,7 @@
 
 #remember to create the /mnt/lfs directory
 
-export LFS=/mnt/lfs #variable delcared
+export LFS=/mnt/lfs #variable declared
 export LFS_TGT=x86_64-lfs-linux-gnu #triple for 64 bit, on linux, from gnu license
 export LFS_DISK=/dev/sdb #find device name with sudo dmesg
 
@@ -26,6 +26,13 @@ mkdir -pv $LFS/sbin
 mkdir -pv $LFS/usr
 mkdir -pv $LFS/var
 
+#check if its a 64 bit system
+case $(uname -m) in
+
+   x86_64) mkdir -pv $LFS/lib64;;
+
+esac
+
 #echo $LFS_TGT | greo -qs '64'; then #just to check if its 64 bit
 #leave if  u want or not, idc
 #  mkdir4 -pv $LFS/lib64
@@ -33,18 +40,13 @@ mkdir -pv $LFS/var
 #another way to do whats before
 #cross tool check that still runs on a
 
-case $(uname -m) in
-
-   x86_64) mkdir -pv $LFS/lib64;;
-
-esac
 
 #do we really want to work in the sd? no but it is what it is
-
 cp -rf *.sh packages.csv "$LFS/sources"
 cd "$LFS/sources"
 
-#for the cross compiler
+#for the cross compiler, var path
 export PATH="$LFS/tool/bin:$PATH"
 
+#start downloading the fies
 source download.sh
