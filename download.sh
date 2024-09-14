@@ -33,9 +33,10 @@ do
     #md5 does not like me apparently
     echo "IM LOSING IT"
     echo "$MD5SUM  $CACHEFILE"
-    md5sum "$CACHEFILE" | cut -d ' ' -f1
-    echo "$MD5SUM"
-    if [[ $(md5sum "$CACHEFILE" | cut -d ' ' -f1) != "$MD5SUM" ]]; then
+    
+    #this was a way to check the md5sum but its too inconvenient and does not checks the file itself 
+    #if [[ $(md5sum "$CACHEFILE" | cut -d ' ' -f1) != "$MD5SUM" ]]; then
+    if ! echo "$MD5SUM  $CACHEFILE" | md5sum -c >/dev/null; then
       rm -f "$CACHEFILE"
       echo "Verification of $CACHEFILE failed! MD5 mismatch!"
       exit 1
