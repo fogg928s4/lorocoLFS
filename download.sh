@@ -32,6 +32,7 @@ do
     #if md5 wrong ehhh remove the file
     #md5 does not like me apparently
     echo "IM LOSING IT"
+    echo "$MD5SUM  $CACHEFILE"
     md5sum "$CACHEFILE" | cut -d ' ' -f1
     echo "$MD5SUM"
     if [[ $(md5sum "$CACHEFILE" | cut -d ' ' -f1) != "$MD5SUM" ]]; then
