@@ -16,23 +16,22 @@ do
   
   #for debugggins that its actually doing that
   #prof deleted this but i like it too much
-  echo NAME $NAME
-  echo VERSION $VERSION
-  echo URL $URL
+  echo NAME $NAME VERSION $VERSION
+  echo FROM URL $URL
   echo MD5 $MD5SUM
   echo FILENAME $CACHEFILE
 
   #check if file alr downlaod to avoid traffic overload
   if [ ! -f "$CACHEFILE" ]; then
-    echo "Downloading $NAME from $URL"
-    #download
+    echo "Downloading $NAME from $URL ....."
+    #downloads the file
     wget "$URL"
     
     #checks if the md5 is right cus u know man in the middle
     #if md5 wrong ehhh remove the file
     #md5 does not like me apparently
-    echo "IM LOSING IT"
-    echo "$MD5SUM  $CACHEFILE"
+    #echo "IM LOSING IT"
+    #echo "$MD5SUM  $CACHEFILE"
     
     #this was a way to check the md5sum but its too inconvenient and does not checks the file itself 
     #if [[ $(md5sum "$CACHEFILE" | cut -d ' ' -f1) != "$MD5SUM" ]]; then
