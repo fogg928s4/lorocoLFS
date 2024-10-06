@@ -42,7 +42,7 @@ esac
 
 
 #do we really want to work in the sd? no but it is what it is
-cp -rf *.sh packages.csv "$LFS/sources"
+cp -rf *.sh ch* packages.csv "$LFS/sources"
 cd "$LFS/sources"
 
 #for the cross compiler, var path
@@ -50,3 +50,7 @@ export PATH="$LFS/tool/bin:$PATH"
 
 #start downloading the fies
 source download.sh
+
+#take script from compiling and pkg nstall
+#5 and binutils are arguments
+source pkginstall.sh 5 binutils

@@ -28,7 +28,6 @@ do
     wget "$URL"
     
     #checks if the md5 is right cus u know man in the middle
-    #if md5 wrong ehhh remove the file
     #md5 does not like me apparently
     #echo "IM LOSING IT"
     #echo "$MD5SUM  $CACHEFILE"
@@ -36,6 +35,7 @@ do
     #this was a way to check the md5sum but its too inconvenient and does not checks the file itself 
     #if [[ $(md5sum "$CACHEFILE" | cut -d ' ' -f1) != "$MD5SUM" ]]; then
     if ! echo "$MD5SUM  $CACHEFILE" | md5sum -c >/dev/null; then
+      #if md5 wrong ehhh remove the file
       rm -f "$CACHEFILE"
       echo "Verification of $CACHEFILE failed! MD5 mismatch!"
       exit 1
